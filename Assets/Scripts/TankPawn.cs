@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TankPawn : PawnScript
+public class TankPawn : Pawn
 {
+    //Allows for fire to be delayed and constant.
+    public float nextfire = 0;
     // Start is called before the first frame update
     public override void Start()
     {
@@ -15,6 +17,18 @@ public class TankPawn : PawnScript
     {
         base.Start();
     }
+
+
+
+    public override void RotateTowards(Vector3 targetPosition){
+        Vector3 vectorToTarget = targetPosition - transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(vectorToTarget, Vector3.up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+    }
+
+
+
+
         //Movement actions are overrided to make the actions specific to the input. 
         //The code used here will be pulled into the PlayerController.
     public override void MoveForward()
@@ -24,6 +38,7 @@ public class TankPawn : PawnScript
         if (mover != null) 
         {
             mover.Move(transform.forward, movementSpeed);
+            volumeDistance = 10;
         } else 
         {
             Debug.LogWarning("Warning: No Mover in TankPawn.MoveForward()!");
@@ -37,6 +52,7 @@ public class TankPawn : PawnScript
         if (mover != null) 
         {
             mover.Move(transform.forward, -movementSpeed);
+            volumeDistance = 10;
         } else 
         {
             Debug.LogWarning("Warning: No Mover in TankPawn.MoveBackward()!");
@@ -48,15 +64,24 @@ public class TankPawn : PawnScript
     {
         Debug.Log("Rotate Clockwise");
         transform.Rotate(0, turnSpeed * Time.deltaTime, 0);
+        volumeDistance = 10;
     }
     public override void RotateCounterClockwise()
     {
         Debug.Log("Rotate Counter-Clockwise");
         transform.Rotate(0, -turnSpeed * Time.deltaTime, 0);
+        volumeDistance = 10;
     }
     // We call onto the shooter and preform the action which is dictated on the key this is assigned to.
-    public override void Shooter(){
-        shooter.Shoot();        
-        Debug.Log("Shooter");
+    public override void Shoot()
+    {
+        if (Time.time >= nextfire)
+        {
+            nextfire = Time.time + fireRate;
+            shooter.Shoot(bulletPrefab, fireForce, damageDone, shelllifespan);
+            volumeDistance = 10;
+            Debug.Log("Shooter");
+        }
+
     }
 }
