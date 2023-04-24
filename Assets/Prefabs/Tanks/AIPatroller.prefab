@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 7098360976593110949}
   - component: {fileID: 7098360976593110946}
   - component: {fileID: 2686623296951300092}
+  - component: {fileID: -8988389970672390501}
   m_Layer: 0
   m_Name: AIPatroller
   m_TagString: Untagged
@@ -131,7 +132,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7945220979162767106}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -197,6 +198,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 100
   maxHealth: 100
+  lives: 0
+  scoreToAdd: 0
+  healthBar: {fileID: 0}
 --- !u!114 &7098360976593110948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +278,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   movementSpeed: 5
+--- !u!114 &-8988389970672390501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7945220979162767106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a44c270dfd5534851893927f775e9803, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerups: []
 --- !u!1001 &7098360976492810438
 PrefabInstance:
   m_ObjectHideFlags: 0

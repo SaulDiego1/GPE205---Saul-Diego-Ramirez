@@ -45,8 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pawn: {fileID: 3408149631587356054, guid: 80a70565f09c84b52aa647547afda494, type: 3}
-  moveForwardKey: 273
-  moveBackwardKey: 274
-  rotateClockwiseKey: 275
-  rotateCounterClockwiseKey: 276
-  shootKey: 32
+  moveForwardKey: 119
+  moveBackwardKey: 115
+  rotateClockwiseKey: 100
+  rotateCounterClockwiseKey: 97
+  shootKey: 113
+  escapeButton: 101
+  pawnScore: {fileID: 0}
+  controllerScore: 0

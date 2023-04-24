@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 7315650205976711361}
   - component: {fileID: 7315650205976711366}
   - component: {fileID: 5664330734709481549}
+  - component: {fileID: 4527133428749308504}
   m_Layer: 0
   m_Name: AIWanderer
   m_TagString: Untagged
@@ -131,7 +132,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7586032972057856102}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -197,6 +198,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 100
   maxHealth: 100
+  lives: 0
+  scoreToAdd: 0
+  healthBar: {fileID: 0}
 --- !u!114 &7315650205976711360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,6 +276,19 @@ MonoBehaviour:
   target: {fileID: 2561782763872562099, guid: 80a70565f09c84b52aa647547afda494, type: 3}
   waypoints: []
   movementSpeed: 0
+--- !u!114 &4527133428749308504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7586032972057856102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a44c270dfd5534851893927f775e9803, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerups: []
 --- !u!1001 &7315650205876733858
 PrefabInstance:
   m_ObjectHideFlags: 0

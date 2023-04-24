@@ -12,13 +12,13 @@ public class MapGenerator : MonoBehaviour
     //This array will use the room templates to generate the level.
     public GameObject[] gridPrefabs;
     //Rows and Columns are defined from what we pass through them. In short this will allow us to do the math for the level and its doors.
-    public int rows;
-    public int cols;
+    public static int rows;
+    public static int cols;
     //Here we defined the width and height of each room so that they can be spaced appropriately.
     public float roomWidth = 50.0f;
     public float roomHeight = 50.0f;
     //This will allow us to create a condtion that will influence what randomness our level will take.
-    public bool isMapOfTheDay;
+    public static bool isMapOfTheDay;
 
     //On start we will generate the map to avoid lag in actual gameplay
     void Start()
@@ -44,12 +44,15 @@ public class MapGenerator : MonoBehaviour
         //With these InitState we define which randomness we can set the level.
         //With the current date or with a given mapseed.
         UnityEngine.Random.InitState(DateToInt(DateTime.Now));
-        UnityEngine.Random.InitState(mapseed);
-        //If our bool is checked then we will used the date as our seed rather than our own set seed.
+
         if(isMapOfTheDay)
         {
             mapseed = DateToInt(DateTime.Now.Date);
         }
+
+        UnityEngine.Random.InitState(mapseed);
+        //If our bool is checked then we will used the date as our seed rather than our own set seed.
+
         grid = new Room[cols, rows];
         for (int currentRow = 0; currentRow < rows; currentRow++)
         {

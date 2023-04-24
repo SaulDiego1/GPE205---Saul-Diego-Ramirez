@@ -44,4 +44,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd7d30369db5490793858931d11d68c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TitleScreenStateObject: {fileID: 0}
+  MainMenuStateObject: {fileID: 0}
+  OptionsScreenStateObject: {fileID: 0}
+  CreditsScreenStateObject: {fileID: 0}
+  GameplayStateObject: {fileID: 0}
+  GameOverScreenStateObject: {fileID: 0}
+  PauseScreenStateObject: {fileID: 501862706243286630, guid: 938f403c1ee8d4b349716027e9d5f5b1, type: 3}
+  allSpawnPoints: []
   players: []
+  AIControllers: []
+  CurrentControllers: []
+  CurrentPawns: []
+  isMapOfTheDay: 0
+  isMultiPlayer: 0
+  rows: 0
+  cols: 0
+  map: {fileID: 0}
+  playerControllerPrefab: {fileID: 0}
+  player1ControllerPrefab: {fileID: 0}
+  player2ControllerPrefab: {fileID: 0}
+  tankPawnPrefab: {fileID: 0}
+  AIPawnPrefab: {fileID: 0}
+  AIControllerPrefab: {fileID: 0}
+  player1Prefab: {fileID: 0}
+  player2Prefab: {fileID: 0}

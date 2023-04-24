@@ -6,11 +6,14 @@ public class DamageOnHit : MonoBehaviour
 {
     public float damageDone;
     public Pawn owner;
+    public float scoreToAdd;
+    public Score playerScore;
     //When the bullet collides with the pawn it will return an owner and the damage done.
     public void OnTriggerEnter(Collider other){
         TankHealth otherHealth = other.gameObject.GetComponent<TankHealth>();
         if (otherHealth != null){
             otherHealth.TakeDamage(damageDone, owner);
+            playerScore.AddScore(scoreToAdd);
         }
         Destroy(gameObject);
     }

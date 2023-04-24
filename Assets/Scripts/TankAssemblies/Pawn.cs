@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public abstract class Pawn : MonoBehaviour
 {
         //This was left publicly open for designers to change the movement speed without ruining the script.
