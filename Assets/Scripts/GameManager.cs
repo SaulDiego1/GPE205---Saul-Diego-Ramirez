@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
         {
             if (scorePickups.Count == 0)
             {
-                WinScreenStateObject.SetActive(false);
+                WinScreenStateObject.SetActive(true);
             }
         }
     }
