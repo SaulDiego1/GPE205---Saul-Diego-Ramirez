@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -12,15 +13,17 @@ public class GameManager : MonoBehaviour
     public GameObject CreditsScreenStateObject;
     public GameObject GameplayStateObject;
     public GameObject GameOverScreenStateObject;
+    public GameObject WinScreenStateObject;
     //Allows for a spawnpoint that the developers can use.
     public GameObject[] allSpawnPoints;
     //Game instance uses instance to decribe itself when deciding if it is active.
     public static GameManager instance;
     //Creates a list for different controllers and pawns.
     public List<PlayerController> players;
-    public List<AIController> AIControllers;
+    public List<AiController> AiController;
     public List<Controller> CurrentControllers;
     public List<Pawn> CurrentPawns;
+    public List<ScorePickup> scorePickups;
     public bool isMapOfTheDay;
     public bool isMultiPlayer;
     public int rows;
@@ -44,7 +47,7 @@ public class GameManager : MonoBehaviour
         MapGenerator.rows = rows;
         MapGenerator.cols = cols;
         MapGenerator.isMapOfTheDay = isMapOfTheDay;
-
+        WinScreenStateObject.SetActive(false);
     }
 
     //On start we will spawn the player
@@ -61,17 +64,24 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-     
+        //If the game is in the GameScene and all the scorePickups are collected, then we will win the game.
+        if (TitleScreenStateObject == null)
+        {
+            if (scorePickups.Count == 0)
+            {
+                WinScreenStateObject.SetActive(false);
+            }
+        }
     }
-    //This will call out to the prefabs created from the PlayerController and TankPawn
+    //This will call out to the prefabs created from the PlayerController and PlayerPawn
     public PlayerController playerControllerPrefab;
     public PlayerController player1ControllerPrefab;
     public PlayerController player2ControllerPrefab;
-    public TankPawn tankPawnPrefab;
-    public TankPawn AIPawnPrefab;
-    public AIController AIControllerPrefab;
-    public TankPawn player1Prefab;
-    public TankPawn player2Prefab;
+    public PlayerPawn playerPrefab;
+    public PlayerPawn AIPawnPrefab;
+    public AiController AIControllerPrefab;
+    public PlayerPawn player1Prefab;
+    public PlayerPawn player2Prefab;
 
     //This function describes the process we use to spawn the player.
     public void SpawnSinglePlayer(){
@@ -80,31 +90,31 @@ public class GameManager : MonoBehaviour
     PlayerController newPlayerObj = Instantiate(playerControllerPrefab, Vector3.zero, Quaternion.identity) as PlayerController;
 
 
-    //This creates the TankPawn that will be used to spawn the PlayerTank. We use the variable playerSpawnTransform as the spawn point.
-    TankPawn newPawnObj = Instantiate(tankPawnPrefab, allSpawnPoints[spawn].transform.position, Quaternion.identity) as TankPawn;
+    //This creates the PlayerPawn that will be used to spawn the Player. We use the variable playerSpawnTransform as the spawn point.
+    PlayerPawn newPawnObj = Instantiate(playerPrefab, allSpawnPoints[spawn].transform.position, Quaternion.identity) as PlayerPawn;
 
-    //Here we are making a new controller and pawn to spawn the tank. This can also be used to clone the tank.
+    //Here we are making a new controller and pawn to spawn the Player. This can also be used to clone the Player.
     PlayerController newController = newPlayerObj.GetComponent<PlayerController>();
-    TankPawn newPawn = newPawnObj.GetComponent<TankPawn>();
+    PlayerPawn newPawn = newPawnObj.GetComponent<PlayerPawn>();
     
-    //We take the pawn and give it a new controller to set this as a new pawn. With this process we create the tank on start.
+    //We take the pawn and give it a new controller to set this as a new pawn. With this process we create the Player on start.
     newController.pawn = newPawn;
     }
 
     public void SpawnAI(){
         int spawn = Random.Range(0, allSpawnPoints.Length);
     //On spawn we will create a new controller that will spawn randomly. This isn't important to the player pawn.
-    AIController newAIObj = Instantiate(AIControllerPrefab, Vector3.zero, Quaternion.identity) as AIController;
+    AiController newAIObj = Instantiate(AIControllerPrefab, Vector3.zero, Quaternion.identity) as AiController;
 
 
-    //This creates the TankPawn that will be used to spawn the PlayerTank. We use the variable playerSpawnTransform as the spawn point.
-    TankPawn newPawnObj = Instantiate(AIPawnPrefab, allSpawnPoints[spawn].transform.position, Quaternion.identity) as TankPawn;
+    //This creates the PlayerPawn that will be used to spawn the AIEnemy. We use the variable playerSpawnTransform as the spawn point.
+    PlayerPawn newPawnObj = Instantiate(AIPawnPrefab, allSpawnPoints[spawn].transform.position, Quaternion.identity) as PlayerPawn;
 
-    //Here we are making a new controller and pawn to spawn the tank. This can also be used to clone the tank.
-    AIController newAIController = newAIObj.GetComponent<AIController>();
-    TankPawn newPawn = newPawnObj.GetComponent<TankPawn>();
+    //Here we are making a new controller and pawn to spawn the AIEnemy. This can also be used to clone the AIEnemy.
+    AiController newAIController = newAIObj.GetComponent<AiController>();
+    PlayerPawn newPawn = newPawnObj.GetComponent<PlayerPawn>();
     
-    //We take the pawn and give it a new controller to set this as a new pawn. With this process we create the tank on start.
+    //We take the pawn and give it a new controller to set this as a new pawn. With this process we create the AIEnemy on start.
     newAIController.pawn = newPawn;
     }
     
@@ -114,14 +124,14 @@ public class GameManager : MonoBehaviour
     PlayerController newPlayerObj = Instantiate(player1ControllerPrefab, Vector3.zero, Quaternion.identity) as PlayerController;
 
 
-    //This creates the TankPawn that will be used to spawn the PlayerTank. We use the variable playerSpawnTransform as the spawn point.
-    TankPawn newPawnObj = Instantiate(player1Prefab, allSpawnPoints[spawn].transform.position, Quaternion.identity) as TankPawn;
+    //This creates the PlayerPawn that will be used to spawn the Player. We use the variable playerSpawnTransform as the spawn point.
+    PlayerPawn newPawnObj = Instantiate(player1Prefab, allSpawnPoints[spawn].transform.position, Quaternion.identity) as PlayerPawn;
 
-    //Here we are making a new controller and pawn to spawn the tank. This can also be used to clone the tank.
+    //Here we are making a new controller and pawn to spawn the Player. This can also be used to clone the Player.
     PlayerController newController = newPlayerObj.GetComponent<PlayerController>();
-    TankPawn newPawn = newPawnObj.GetComponent<TankPawn>();
+    PlayerPawn newPawn = newPawnObj.GetComponent<PlayerPawn>();
     
-    //We take the pawn and give it a new controller to set this as a new pawn. With this process we create the tank on start.
+    //We take the pawn and give it a new controller to set this as a new pawn. With this process we create the Player on start.
     newController.pawn = newPawn;
     }
     public void SpawnPlayer2(){
@@ -130,14 +140,14 @@ public class GameManager : MonoBehaviour
     PlayerController newPlayerObj = Instantiate(player2ControllerPrefab, Vector3.zero, Quaternion.identity) as PlayerController;
 
 
-    //This creates the TankPawn that will be used to spawn the PlayerTank. We use the variable playerSpawnTransform as the spawn point.
-    TankPawn newPawnObj = Instantiate(player2Prefab, allSpawnPoints[spawn].transform.position, Quaternion.identity) as TankPawn;
+    //This creates the PlayerPawn that will be used to spawn the Player. We use the variable playerSpawnTransform as the spawn point.
+    PlayerPawn newPawnObj = Instantiate(player2Prefab, allSpawnPoints[spawn].transform.position, Quaternion.identity) as PlayerPawn;
 
-    //Here we are making a new controller and pawn to spawn the tank. This can also be used to clone the tank.
+    //Here we are making a new controller and pawn to spawn the Player. This can also be used to clone the Player.
     PlayerController newController = newPlayerObj.GetComponent<PlayerController>();
-    TankPawn newPawn = newPawnObj.GetComponent<TankPawn>();
+    PlayerPawn newPawn = newPawnObj.GetComponent<PlayerPawn>();
     
-    //We take the pawn and give it a new controller to set this as a new pawn. With this process we create the tank on start.
+    //We take the pawn and give it a new controller to set this as a new pawn. With this process we create the Player on start.
     newController.pawn = newPawn;
     }
     public void ActivateGameplay()
@@ -161,7 +171,6 @@ public class GameManager : MonoBehaviour
         OptionsScreenStateObject.SetActive(false);
         CreditsScreenStateObject.SetActive(false);
         GameplayStateObject.SetActive(false);
-        GameOverScreenStateObject.SetActive(false);
     }
     //All of the Activate functions below open the menu we want open.
         public void ActivateTitleScreen()
@@ -174,25 +183,23 @@ public class GameManager : MonoBehaviour
         DeactivateAllStates();
         MainMenuStateObject.SetActive(true);
     }
-            public void ActivateOptionsStateScreen()
+        public void ActivateOptionsStateScreen()
     {
         DeactivateAllStates();
         OptionsScreenStateObject.SetActive(true);
     }
-            public void ActivateCreditsStateScreen()
+        public void ActivateCreditsStateScreen()
     {
         DeactivateAllStates();
         CreditsScreenStateObject.SetActive(true);
     }
-            public void ActivateGameplayStateScreen()
+        public void ActivateGameplayStateScreen()
     {
         DeactivateAllStates();
         GameplayStateObject.SetActive(true);
-        SceneManager.LoadScene("TanksLevel");
-        map.GenerateMap();
-        ActivateGameplay();
+        SceneManager.LoadScene("GameScene");
     }
-            public void ActivateGameOverStateScreen()
+        public void ActivateGameOverStateScreen()
     {
         DeactivateAllStates();
         GameOverScreenStateObject.SetActive(true);
@@ -203,49 +210,4 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Main");
     }
     //When we want the game to end we can define the conditions for a game over here.
-    public void GameOver()
-    {
-        if (player1Prefab == null)
-        {
-            if (player2Prefab == null)
-            {
-                SceneManager.LoadScene("GameOver");
-            }
-        }
-        if (tankPawnPrefab == null)
-        {
-            if (player1Prefab != null)
-            {
-
-            } 
-            if (player1Prefab == null)
-            {
-                if (player2Prefab == null)
-            {
-                SceneManager.LoadScene("GameOver");
-            }
-            }        
-        }
-        if (player1Prefab == null)
-        {
-            if (player2Prefab == null)
-            {
-                SceneManager.LoadScene("GameOver");
-            }
-        }
-        if (tankPawnPrefab == null)
-        {
-            if (player1Prefab != null)
-            {
-
-            } 
-            if (player1Prefab == null)
-            {
-                if (player2Prefab == null)
-            {
-                SceneManager.LoadScene("GameOver");
-            }
-            }        
-        }      
-    }
 }

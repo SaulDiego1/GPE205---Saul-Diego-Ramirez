@@ -7,11 +7,11 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Main.unity
-    guid: ab96d760279d2417d831f54e7e8de790
+    guid: 7bf956cec27e84e21926ef51fc6e83cc
   - enabled: 1
-    path: Assets/Scenes/TanksLevel.unity
+    path: Assets/Scenes/GameScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
-    guid: 94c1cc4675c134fb78cabbcedc77f872
+    guid: 5a0b9e000c30c40afb2c9c25211e588f
   m_configObjects: {}

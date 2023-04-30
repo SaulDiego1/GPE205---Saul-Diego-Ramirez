@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AIController : Controller
+[System.Serializable]
+public abstract class AiController : Controller
 {
     //We make current state for our AI in order to play out the states we create.
     public AIState currentState;
@@ -24,23 +25,23 @@ public abstract class AIController : Controller
         base.Start();
 
         if(GameManager.instance != null){
-            if(GameManager.instance.AIControllers != null){
-                GameManager.instance.AIControllers.Add(this);
+            if(GameManager.instance.AiController != null){
+                GameManager.instance.AiController.Add(this);
             }
         }
     }
 
         public void OnDestroy(){
         if (GameManager.instance != null){
-            if (GameManager.instance.AIControllers != null){
-                GameManager.instance.AIControllers.Remove(this);
+            if (GameManager.instance.AiController != null){
+                GameManager.instance.AiController.Remove(this);
             }
         }
     }
 
     public override void Update()
     {
-        makeDecisions();
+        MakeDecisions();
         base.Start();
     }
 
@@ -134,7 +135,7 @@ public abstract class AIController : Controller
     }
 //---------------------------------------------------------------------------------------------
 
-    public abstract void makeDecisions();
+    public abstract void MakeDecisions();
     //ChangeState will set a new state for the AI and allow for that new state to run uninterrupted.
     public virtual void ChangeState(AIState newState)
     {

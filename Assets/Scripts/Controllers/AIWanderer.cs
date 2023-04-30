@@ -2,22 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIWanderer : AIController
+public class AIWanderer : AiController
 {
     //We will get the health of the pawn and make it perform actions based on this.
-    TankHealth health;
+    Health health;
     PawnSpawnpoint spawn;
     void Start()
     {
-        health = GetComponent<TankHealth>();
+        health = GetComponent<Health>();
         spawn = GetComponent<PawnSpawnpoint>();
     }
     void Update()
     {
-        makeDecisions();
+        MakeDecisions();
     }
     //Will decide how to change states. This is caused by conditions and seperated by breaks.
-    public override void makeDecisions()
+    public override void MakeDecisions()
     {
         switch (currentState) {
             case AIState.DoSeekState:

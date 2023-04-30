@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class ItemSpawner : MonoBehaviour
 {
     //We will put our desired Pickup in here to use in the spawner.

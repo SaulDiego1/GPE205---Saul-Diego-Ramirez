@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-[System.Serializable]
+
 public class PlayerController : Controller
 {
     PawnSpawnpoint spawn;
@@ -13,6 +12,8 @@ public class PlayerController : Controller
     public KeyCode moveBackwardKey;
     public KeyCode rotateClockwiseKey;
     public KeyCode rotateCounterClockwiseKey;
+    public KeyCode jumpKey;
+    public KeyCode dashKey;
     public KeyCode shootKey;
     public KeyCode escapeButton;
     public Score pawnScore;
@@ -68,9 +69,17 @@ public class PlayerController : Controller
         {
             pawn.Shoot();
         }
-        if (Input.GetKey(escapeButton))
+        if (Input.GetKeyDown(escapeButton))
         {
             SceneManager.LoadScene("Main");
+        }
+        if (Input.GetKeyDown(jumpKey))
+        {
+            pawn.JumpUp();
+        }
+        if (Input.GetKey(dashKey))
+        {
+            pawn.DashAction();
         }
     }
 }

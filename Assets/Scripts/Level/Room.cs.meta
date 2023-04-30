@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 45149400e10c843bc8ed2c7a0af45aa2
+guid: ef9b8cfc74c13aa44824c46726f2e89c
 MonoImporter:
-  externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - doorNorth: {instanceID: 0}
-  - doorSouth: {instanceID: 0}
-  - doorEast: {instanceID: 0}
-  - doorWest: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
-  assetBundleName: 
-  assetBundleVariant: 
